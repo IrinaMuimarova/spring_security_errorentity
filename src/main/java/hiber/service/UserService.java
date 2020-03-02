@@ -5,6 +5,10 @@ import hiber.model.User;
 import java.util.List;
 
 public interface UserService {
-    void add(User user);
-    List<User> listUsers();
+    List<User> getAllUser();
+    boolean addUser(User user);
+    void deleteUser(long id);
+    User getUserById(Long id);
+    void updateUser(User user);
+    User getUserByLogin(String login);
 }
