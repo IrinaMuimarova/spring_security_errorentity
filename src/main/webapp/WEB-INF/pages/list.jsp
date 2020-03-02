@@ -5,7 +5,6 @@
   Time: 0:18
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <html>
@@ -17,7 +16,7 @@
 <body class="w3-light-grey">
 <div class="w3-container w3-blue-grey w3-opacity w3-right-align">
     <h1>
-        <button class="w3-btn w3-round-large" onclick="location.href='/admin/add'">+</button>
+        <button class="w3-btn w3-round-large" onclick="location.href='/add'">+</button>
         <button class="w3-btn w3-round-large w3-large" onclick="location.href='/logOut'">Log out</button>
     </h1>
 </div>
@@ -28,28 +27,31 @@
             <h2>Users</h2>
         </div>
         <table class="w3-table">
-            <c:if test="${not empty userNames}">
-                <c:forEach var="user" items="${requestScope.userNames}">
+            <c:if test="${not empty users}">
+                <c:forEach var="user" items="${users}">
+                    <!-- construct an "update" link with customer id -->
+                    <c:url var="updateLink" value="/update">
+                        <c:param name="userId" value="${user.id}" />
+                    </c:url>
+
+                    <!-- construct an "delete" link with customer id -->
+                    <c:url var="deleteLink" value="/delete">
+                        <c:param name="userId" value="${user.id}" />
+                    </c:url>
                     <tr>
-                        <th>${user.getId()}</th>
-                        <th>${user.getName()}</th>
-                        <th>${user.getLogin()}</th>
-                        <form action="<c:url value="edit.jsp"/>" method="get">
-                            <input type="hidden" name="id" value= ${user.getId()}>
-                            <th class=\"w3-right-align\">
-                                <button class="w3-btn w3-round-small w3-margin-right"><i class="fa fa-edit w3-large"></i></button>
-                            </th>
-                        </form>
-                        <form action="/admin/delete" method="get">
-                            <input type="hidden" name="id" value=${user.getId()}>
-                            <th class="w3-right-align">
-                                <button class="w3-btn w3-round-small w3-margin-right"><i class="fa fa-trash w3-large"></i></button>
-                            </th>
-                        </form>
+                        <th>${user.id}</th>
+                        <th>${user.name}</th>
+                        <th>${user.login}</th>
+
+                        <td>
+                            <!-- display the update link --> <a href="${updateLink}">Update</a>
+                            | <a href="${deleteLink}"
+                                 onclick="if (!(confirm('Are you sure you want to delete this customer?'))) return false">Delete</a>
+                        </td>
                     </tr>
                 </c:forEach>
             </c:if>
-            <c:if test="${empty userNames}">
+            <c:if test="${empty users}">
                 <div class="w3-panel w3-red w3-display-container w3-card-4 w3-round">
                     <span onclick="this.parentElement.style.display='none'" class="w3-button w3-margin-right w3-display-right w3-round-large w3-hover-red w3-border w3-border-red w3-hover-border-grey">×</span>
                     <h5>There are no users yet!</h5>
