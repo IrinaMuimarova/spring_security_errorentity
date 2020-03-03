@@ -2,7 +2,6 @@ package hiber.controller;
 
 import hiber.model.User;
 import hiber.service.UserService;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/")
-    public String getUser(Model model){
+    public String getUser(Model model) {
         List<User> users = userService.getAllUser();
         model.addAttribute("users", users);
         return "list";
@@ -46,7 +45,13 @@ public class UserController {
     public String showFormForUpdate(@RequestParam("userId") Long id,
                                     Model model) {
         model.addAttribute("user", userService.getUserById(id));
-        return "formUser";
+        return "editUser";
+    }
+
+    @PostMapping("/updateUser")
+    public String updateUser(@ModelAttribute("user") User user) {
+        userService.updateUser(user);
+        return "redirect:/";
     }
 
     @GetMapping("/delete")
