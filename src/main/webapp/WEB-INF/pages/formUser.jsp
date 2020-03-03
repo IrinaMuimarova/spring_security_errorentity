@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <html>
 <head>
     <title>Add new User</title>
@@ -22,23 +22,22 @@
             <h2>Add user</h2>
         </div>
         <form:form action="saveUser" method="post" class="w3-selection w3-light-grey w3-padding" modelAttribute="user">
-            <form:hidden path="id" />
+            <form:hidden path="id"/>
             <label>Name:
                 <form:input path="name" class="w3-input w3-animate-input w3-border w3-round-large"
-                       style="width: 30%"/>
+                            style="width: 30%"/>
             </label>
             <label>Login:
                 <form:input path="login" class="w3-input w3-animate-input w3-border w3-round-large"
-                       style="width: 30%"/>
+                            style="width: 30%"/>
             </label>
             <label>Password:
                 <form:input path="password" class="w3-input w3-animate-input w3-border w3-round-large"
-                       style="width: 30%"/>
+                            style="width: 30%"/>
             </label>
             <label>Role:
                 <form:select path="role">
-                    <option value="" disabled selected>Choose role</option>
-                    <option value="admin">admin</option>
+                    <option  value="admin">admin</option>
                     <option value="user">user</option>
                 </form:select>
             </label>
@@ -47,7 +46,9 @@
     </div>
 
     <div class="w3-container w3-grey w3-opacity w3-right-align w3-padding">
-        <button class="w3-btn w3-round-large" onclick="location.href='/admin'">Back to main</button>
+        <label>
+            <button class="w3-btn w3-round-large" onclick="location.href='/'">Back to main</button>
+        </label>
     </div>
 </div>
 </body>

@@ -16,8 +16,7 @@
 <body class="w3-light-grey">
 <div class="w3-container w3-blue-grey w3-opacity w3-right-align">
     <h1>
-        <button class="w3-btn w3-round-large" onclick="location.href='/add'">+</button>
-        <button class="w3-btn w3-round-large w3-large" onclick="location.href='/logOut'">Log out</button>
+        <a class="w3-btn w3-round-large" href="/add">+</a>
     </h1>
 </div>
 
@@ -42,6 +41,7 @@
                         <th>${user.id}</th>
                         <th>${user.name}</th>
                         <th>${user.login}</th>
+                        <th>${user.role}</th>
 
                         <td>
                             <!-- display the update link --> <a href="${updateLink}">Update</a>
@@ -58,9 +58,6 @@
                 </div>
             </c:if>
         </table>
-        <div class="w3-container w3-opacity w3-left-align w3-padding">
-            <button class="w3-btn w3-round-large w3-blue" onclick="location.href='/view/userCard.jsp'">User Card</button>
-        </div>
     </div>
 </div>
 </body>
