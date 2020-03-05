@@ -6,12 +6,13 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
 public class UserDaoImp implements UserDao {
 
-    @Autowired
+    @PersistenceContext
     EntityManager entityManager;
 
     @Transactional
@@ -20,6 +21,7 @@ public class UserDaoImp implements UserDao {
         entityManager.persist(user);
     }
 
+    @SuppressWarnings("unchecked")
     @Transactional
     @Override
     public List<User> getUsers() {
@@ -30,7 +32,6 @@ public class UserDaoImp implements UserDao {
     @Override
     public User getUserById(Long id) {
         User user = entityManager.find(User.class, id);
-        entityManager.detach(user);
         return user;
     }
 
@@ -45,5 +46,14 @@ public class UserDaoImp implements UserDao {
     @Override
     public void updateUser(User user) {
         entityManager.merge(user);
+    }
+
+    @Transactional
+    @Override
+    public User getUserByLogin(String login) {
+        return (User) entityManager
+                .createQuery("from User where login = ?")
+                .setParameter(0, login)
+                .getSingleResult();
     }
 }

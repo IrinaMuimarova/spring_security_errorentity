@@ -14,9 +14,8 @@ public class UserServiceImp implements UserService {
     private UserDao userDao;
 
     @Override
-    public boolean saveUser(User user) {
+    public void saveUser(User user) {
         userDao.saveUser(user);
-        return true;
     }
 
     @Override
@@ -38,5 +37,10 @@ public class UserServiceImp implements UserService {
     @Override
     public void updateUser(User user) {
         userDao.updateUser(user);
+    }
+
+    @Override
+    public User getUserByLogin(String login) {
+        return userDao.getUserByLogin(login);
     }
 }
