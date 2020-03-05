@@ -13,9 +13,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {
-        "hiber"
-})
+@ComponentScan("hiber")
 public class WebMvcConfig implements WebMvcConfigurer {
 
    @Bean

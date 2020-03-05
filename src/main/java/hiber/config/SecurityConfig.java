@@ -2,9 +2,10 @@ package hiber.config;
 
 import hiber.config.handler.LoginSuccessHandler;
 import hiber.model.Role;
-import hiber.service.UserDetailsServiceImp;
+import hiber.service.MyUserDetailsServiceImp;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -21,12 +22,11 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {  // WebSecurityConfigurerAdapter базовый класс для создания экземпляра WebSecurityConfigurer, для кастомизации переопределяем методы
 
     @Autowired
-    @Qualifier("userDetailsService")
-    private UserDetailsServiceImp userDetailsServiceImp;
+    private MyUserDetailsServiceImp userDetailsService;
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {//переопределенный метод для конфигурации аутентификации для разных источников(память, бд, LDAP, )
-        auth.userDetailsService(userDetailsServiceImp)
+        auth.userDetailsService(userDetailsService)
                     .passwordEncoder(passwordEncoder());        //кастомизация на юзер дао и кодировка
     }
 
