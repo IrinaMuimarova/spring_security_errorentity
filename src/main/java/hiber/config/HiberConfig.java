@@ -18,7 +18,6 @@ import java.util.Properties;
 @Configuration
 @PropertySource("classpath:db.properties")
 @EnableTransactionManagement
-
 public class HiberConfig {
 
     @Autowired
@@ -53,7 +52,7 @@ public class HiberConfig {
     }
 
     @Bean
-    public PlatformTransactionManager transactionManager(LocalSessionFactoryBean emf) throws Exception {
+    public HibernateTransactionManager transactionManager(LocalSessionFactoryBean emf) throws Exception {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
         transactionManager.setSessionFactory(emf.getObject());
         return transactionManager;

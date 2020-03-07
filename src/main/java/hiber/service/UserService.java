@@ -1,11 +1,12 @@
 package hiber.service;
 
 import hiber.model.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Transactional
+//@Transactional
 public interface UserService {
     List<User> getAllUser();
 

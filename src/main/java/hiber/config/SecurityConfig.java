@@ -2,8 +2,11 @@ package hiber.config;
 
 import hiber.config.handler.LoginSuccessHandler;
 import hiber.model.Role;
+import hiber.security.MyUserDetailsServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScans;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -63,8 +66,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {  // WebSecuri
                 //страницы аутентификаци доступна всем
                 .antMatchers("/login").anonymous()
                 // защищенные URL
-                .antMatchers("/user/**").hasAuthority(Role.USER.name())
-                .antMatchers("/admin/**").hasAuthority(Role.ADMIN.name())
+                .antMatchers("/user/**").hasAuthority("USER")
+                .antMatchers("/admin/**").hasAuthority("ADMIN")
                 .anyRequest().authenticated();
     }
 
