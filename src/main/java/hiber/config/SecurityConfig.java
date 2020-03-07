@@ -2,11 +2,8 @@ package hiber.config;
 
 import hiber.config.handler.LoginSuccessHandler;
 import hiber.model.Role;
-import hiber.service.UserService;
-import hiber.service.UserServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,18 +14,20 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+
 @Configuration
 @EnableWebSecurity
 //включает WebSecurity, говорит что мы будем использовать
 public class SecurityConfig extends WebSecurityConfigurerAdapter {  // WebSecurityConfigurerAdapter базовый класс для создания экземпляра WebSecurityConfigurer, для кастомизации переопределяем методы
 
     @Autowired
-    private UserDetailsService userService;
+    private UserDetailsService userDetailsService;
+
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {//переопределенный метод для конфигурации аутентификации для разных источников(память, бд, LDAP, )
-        auth.userDetailsService(userService)
-                    .passwordEncoder(passwordEncoder());        //кастомизация на юзер дао и кодировка
+        auth.userDetailsService(userDetailsService)
+                .passwordEncoder(passwordEncoder());        //кастомизация на юзер дао и кодировка
     }
 
     @Override
@@ -37,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {  // WebSecuri
                 // указываем страницу с формой логина
                 .loginPage("/login")
                 //указываем логику обработки при логине
-               .successHandler(new LoginSuccessHandler())
+                .successHandler(new LoginSuccessHandler())
                 // указываем action с формы логина
                 .loginProcessingUrl("/login")
                 // Указываем параметры логина и пароля с формы логина
