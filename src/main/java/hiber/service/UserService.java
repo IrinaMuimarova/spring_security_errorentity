@@ -11,11 +11,12 @@ public interface UserService {
 
     void saveUser(User user);
 
-    void deleteUser(Long id);
+    void deleteUser(Integer id);
 
-    User getUserById(Long id);
+    User getUserById(Integer id);
 
     void updateUser(User user);
 
     User getUserByLogin(String login);
+
 }

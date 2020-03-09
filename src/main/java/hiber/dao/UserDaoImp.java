@@ -17,10 +17,7 @@ public class UserDaoImp implements UserDao {
     @Override
     @Transactional
     public void saveUser(User user) {
-         //   entityManager.getTransaction().begin();
             entityManager.persist(user);
-         //   entityManager.flush();
-            //entityManager.getTransaction().commit();
     }
 
     @SuppressWarnings("unchecked")
@@ -30,18 +27,20 @@ public class UserDaoImp implements UserDao {
     }
 
     @Override
-    public User getUserById(Long id) {
+    public User getUserById(Integer id) {
         User user = entityManager.find(User.class, id);
         return user;
     }
 
     @Override
-    public void deleteUser(Long id) {
+    @Transactional
+    public void deleteUser(Integer id) {
         User user = entityManager.find(User.class, id);
         entityManager.remove(user);
     }
 
     @Override
+    @Transactional
     public void updateUser(User user) {
         entityManager.merge(user);
     }

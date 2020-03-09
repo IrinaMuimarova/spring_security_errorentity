@@ -7,9 +7,9 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return new Class[]{
-                WebMvcConfig.class,
                 SecurityConfig.class,
-                HiberConfig.class
+                HiberConfig.class,
+                WebMvcConfig.class
         };
     }
 

@@ -18,9 +18,6 @@
         <a class="w3-btn w3-round-large" href="/logout">Log out</a>
     </h1>
 </div>
-<div class="w3-container w3-blue-grey w3-opacity w3-right-align">
-    <h1>Edit User</h1>
-</div>
 <div class="w3-container w3-padding">
     <div class="w3-card-4">
         <div class="w3-container w3-center w3-green">
@@ -37,15 +34,17 @@
                             style="width: 30%"/>
             </label>
             <label>Password:
-                <form:input path="password" class="w3-input w3-animate-input w3-border w3-round-large"
+                <form:password path="password"  class="w3-input w3-animate-input w3-border w3-round-large"
+
                             style="width: 30%"/>
             </label>
-            <label>Role:
-                <label>Role:
-                    <label><form:checkbox path="roles" value="ADMIN" label="ADMIN"/></label>
-                    <label><form:checkbox path="roles" value="USER" label="USER"/></label>
-                </label>
+                <form:label path="roles" >Role:
+                    <br/>
+                    <jsp:useBean id="roles" scope="request" type="java.util.List"/>
+                    <form:checkboxes path="roles" items="${roles}" itemLabel="name" itemValue="id" delimiter="<br/>" />
+                </form:label>
             </label>
+            <br/>
             <form:button class="w3-btn w3-green w3-round-large w3-margin-bottom">Sing Up</form:button>
         </form:form>
     </div>

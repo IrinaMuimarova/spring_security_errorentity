@@ -36,6 +36,7 @@
         <setting name="validation-enabled" value="true" />
         <datasource-mapping>
           <factory-entry name="Entities" value="4b1c6b1a-b377-4da3-b473-8597a548ca8e" />
+          <factory-entry name="entityManagerFactory" value="4b1c6b1a-b377-4da3-b473-8597a548ca8e" />
         </datasource-mapping>
         <naming-strategy-map />
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/META-INF/persistence.xml" />

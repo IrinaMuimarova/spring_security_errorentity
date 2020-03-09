@@ -23,23 +23,28 @@
         <div class="w3-container w3-center w3-green">
             <h2>Add user</h2>
         </div>
+        <%--@elvariable id="user" type="hiber.model.User"--%>
         <form:form action="saveUser" method="post" class="w3-selection w3-light-grey w3-padding" modelAttribute="user">
-            <label>Name:
+            <form:label path="name">Name:
                 <form:input path="name" class="w3-input w3-animate-input w3-border w3-round-large"
                             style="width: 30%"/>
-            </label>
-            <label>Login:
+            </form:label>
+            <form:label path="login">Login:
                 <form:input path="login" class="w3-input w3-animate-input w3-border w3-round-large"
                             style="width: 30%"/>
-            </label>
-            <label>Password:
-                <form:input path="password" class="w3-input w3-animate-input w3-border w3-round-large"
+            </form:label>
+            <form:label path="password">Password:
+                <form:password path="password" class="w3-input w3-animate-input w3-border w3-round-large"
                             style="width: 30%"/>
+            </form:label>
+            <form:label path="roles" >Role:
+                <br/>
+                <jsp:useBean id="roles" scope="request" type="java.util.List"/>
+                <form:checkboxes path="roles" items="${roles}" itemLabel="name" itemValue="id" delimiter="<br/>" />
+            </form:label>
+
             </label>
-            <label>Role:
-                <br><form:checkbox path="roles" value="ADMIN" label="ADMIN"/></br>
-                <br><form:checkbox path="roles" value="USER" label="USER"/></br>
-            </label>
+            <br/>
             <form:button class="w3-btn w3-green w3-round-large w3-margin-bottom">Sing Up</form:button>
         </form:form>
     </div>

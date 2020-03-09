@@ -1,13 +1,16 @@
 package hiber.controller;
 
+import hiber.model.Role;
 import hiber.model.User;
+import hiber.service.RoleService;
 import hiber.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import java.beans.PropertyEditorSupport;
 import java.util.List;
 
 
@@ -17,6 +20,9 @@ public class AdminController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    RoleService roleService;
 
     @GetMapping
     public String getUser(Model model) {
@@ -29,6 +35,7 @@ public class AdminController {
     public String showFormForAdd(Model model) {
         User user = new User();
         model.addAttribute("user", user);
+        model.addAttribute("roles", roleService.getRoles());
         return "admin/formUser";
     }
 
@@ -39,9 +46,10 @@ public class AdminController {
     }
 
     @GetMapping("/update")
-    public String showFormForUpdate(@RequestParam("userId") Long id,
+    public String showFormForUpdate(@RequestParam("userId") Integer id,
                                     Model model) {
         model.addAttribute("user", userService.getUserById(id));
+        model.addAttribute("roles", roleService.getRoles());
         return "admin/editUser";
     }
 
@@ -52,8 +60,18 @@ public class AdminController {
     }
 
     @GetMapping("/delete")
-    public String delete(@RequestParam("userId") Long id) {
+    public String delete(@RequestParam("userId") Integer id) {
         userService.deleteUser(id);
         return "redirect:/admin";
+    }
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(Role.class, "roles", new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String text) {
+                setValue(roleService.getRoleById(new Integer(text)));
+            }
+        });
     }
 }

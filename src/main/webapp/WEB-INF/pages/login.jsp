@@ -31,7 +31,7 @@
                        style="width: 30%"><br/>
             </label>
             <label>Password:
-                <input type="text" name="j_password" required class="w3-input w3-animate-input w3-border w3-round-large"
+                <input type="password" name="j_password" required class="w3-input w3-animate-input w3-border w3-round-large"
                        style="width: 30%"><br/>
             </label>
             <button type="submit" class="w3-btn w3-green w3-round-large w3-margin-bottom">Sing Up</button>
