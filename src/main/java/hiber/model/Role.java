@@ -10,17 +10,14 @@ import java.util.List;
 public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", length = 64)
-    private int id;
+    private Integer id;
 
     @Column(name = "name")
     private String name;
 
-    @ManyToMany
-    @JoinTable (name = "role_user",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private List<User> users;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public String getName() {
         return name;
@@ -30,11 +27,11 @@ public class Role implements GrantedAuthority {
         this.name = name;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -43,11 +40,11 @@ public class Role implements GrantedAuthority {
         return getName();
     }
 
-    public List<User> getUsers() {
-        return users;
+    public User getUsers() {
+        return user;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

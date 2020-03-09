@@ -13,9 +13,8 @@ import java.util.Objects;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", length = 64)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Integer id;
 
     @Column(name = "name")
     private String name;
@@ -27,22 +26,19 @@ public class User implements UserDetails {
     private String password;
 
     @Column(name = "enables")
-    private boolean enables;
+    private Boolean enables;
 
-    @ManyToMany
-    @JoinTable (name = "role_user",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Role> roles;
 
     public User() {
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -76,6 +72,14 @@ public class User implements UserDetails {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public Boolean isEnables() {
+        return enables;
+    }
+
+    public void setEnables(Boolean enables) {
+        this.enables = enables;
     }
 
     @Override

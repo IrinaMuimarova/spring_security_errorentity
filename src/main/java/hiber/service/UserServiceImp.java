@@ -3,12 +3,10 @@ package hiber.service;
 import hiber.dao.UserDao;
 import hiber.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Service
@@ -17,7 +15,13 @@ public class UserServiceImp implements UserService {
     @Autowired
     private UserDao userDao;
 
+    @PostConstruct
+    public void init(){
+        System.out.println("UserDao create");
+    }
+
     @Override
+    @Transactional
     public void saveUser(User user) {
         userDao.saveUser(user);
     }

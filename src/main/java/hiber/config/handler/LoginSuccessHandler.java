@@ -2,6 +2,7 @@ package hiber.config.handler;
 
 import hiber.model.Role;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
@@ -17,11 +18,11 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest,
                                         HttpServletResponse httpServletResponse,
                                         Authentication authentication) throws IOException, ServletException {
-        if (authentication.getAuthorities().contains("ADMIN")){
+      //  if (authentication.getAuthorities().contains("ROLE_ADMIN")){
             httpServletResponse.sendRedirect("/admin");
-        } else {
-            httpServletResponse.sendRedirect("/user");
-        }
+//        } else {
+//            httpServletResponse.sendRedirect("/user");
+//        }
 
     }
 }

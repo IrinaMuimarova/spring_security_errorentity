@@ -1,10 +1,9 @@
 package hiber.dao;
 
 import hiber.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
@@ -15,14 +14,13 @@ public class UserDaoImp implements UserDao {
     @PersistenceContext
     EntityManager entityManager;
 
-    @PostConstruct
-    public void init(){
-        System.out.println("EntityManager create");
-    }
-
     @Override
+    @Transactional
     public void saveUser(User user) {
-        entityManager.persist(user);
+         //   entityManager.getTransaction().begin();
+            entityManager.persist(user);
+         //   entityManager.flush();
+            //entityManager.getTransaction().commit();
     }
 
     @SuppressWarnings("unchecked")

@@ -16,7 +16,7 @@
 <body class="w3-light-grey">
 <div class="w3-container w3-blue-grey w3-opacity w3-right-align">
     <h1>
-        <a class="w3-btn w3-round-large" href="/add">+</a>
+        <a class="w3-btn w3-round-large" href="/admin/add">+</a>
         <a class="w3-btn w3-round-large" href="/logout">Log out</a>
     </h1>
 </div>
@@ -30,12 +30,12 @@
             <c:if test="${not empty users}">
                 <c:forEach var="user" items="${users}">
                     <!-- construct an "update" link with customer id -->
-                    <c:url var="updateLink" value="/update">
+                    <c:url var="updateLink" value="/admin/update">
                         <c:param name="userId" value="${user.id}" />
                     </c:url>
 
                     <!-- construct an "delete" link with customer id -->
-                    <c:url var="deleteLink" value="/delete">
+                    <c:url var="deleteLink" value="/admin/delete">
                         <c:param name="userId" value="${user.id}" />
                     </c:url>
                     <tr>
