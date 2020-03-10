@@ -29,6 +29,10 @@ public class User implements UserDetails {
     private Boolean enables;
 
     @ManyToMany(cascade=CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @JoinTable(
+            name="user_role",
+            joinColumns={@JoinColumn(name="USER_ID", referencedColumnName="ID")},
+            inverseJoinColumns={@JoinColumn(name="ROLE_ID", referencedColumnName="ID")})
     private Set<Role> roles;
 
     public User() {
