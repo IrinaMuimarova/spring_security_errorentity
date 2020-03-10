@@ -5,8 +5,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -28,11 +28,8 @@ public class User implements UserDetails {
     @Column(name = "enables")
     private Boolean enables;
 
-    @ManyToMany(cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
-    @JoinTable(
-            name="user_role",
-            joinColumns={@JoinColumn(name="USER_ID", referencedColumnName="ID")},
-            inverseJoinColumns={@JoinColumn(name="ROLE_ID", referencedColumnName="ID")})    private List<Role> roles;
+    @ManyToMany(cascade=CascadeType.REFRESH, fetch = FetchType.EAGER)
+    private Set<Role> roles;
 
     public User() {
     }
@@ -69,11 +66,11 @@ public class User implements UserDetails {
         this.login = login;
     }
 
-    public List<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 

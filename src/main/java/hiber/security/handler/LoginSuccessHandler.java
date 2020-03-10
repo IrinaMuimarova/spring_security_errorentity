@@ -1,8 +1,6 @@
-package hiber.config.handler;
+package hiber.security.handler;
 
-import hiber.model.Role;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
