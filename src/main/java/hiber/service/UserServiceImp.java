@@ -15,11 +15,6 @@ public class UserServiceImp implements UserService {
     @Autowired
     private UserDao userDao;
 
-    @PostConstruct
-    public void init(){
-        System.out.println("UserDao create");
-    }
-
     @Override
     @Transactional
     public void saveUser(User user) {

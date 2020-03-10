@@ -65,9 +65,9 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @InitBinder
+    @InitBinder                                         //запускаеи блок initBinder для обработки списка прав
     public void initBinder(WebDataBinder binder) {
-        binder.registerCustomEditor(Role.class, "roles", new PropertyEditorSupport() {
+        binder.registerCustomEditor(Role.class, "roles", new PropertyEditorSupport() {          //переводим String id в Role
             @Override
             public void setAsText(String text) {
                 setValue(roleService.getRoleById(new Integer(text)));

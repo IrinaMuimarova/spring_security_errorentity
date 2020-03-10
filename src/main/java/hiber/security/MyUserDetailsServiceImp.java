@@ -19,11 +19,6 @@ public class MyUserDetailsServiceImp implements UserDetailsService {
     @Autowired
     private UserService userService;
 
-    @PostConstruct
-    public void init(){
-        System.out.println("UserService create");
-    }
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userService.getUserByLogin(username);

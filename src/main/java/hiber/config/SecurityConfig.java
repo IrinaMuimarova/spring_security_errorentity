@@ -22,11 +22,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {  // WebSecuri
     @Autowired
     private UserDetailsService userDetailsService;
 
-    @PostConstruct
-    public void init() {
-        System.out.println("UserDetailsService create");
-    }
-
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {//переопределенный метод для конфигурации аутентификации для разных источников(память, бд, LDAP, )
         auth.userDetailsService(userDetailsService)

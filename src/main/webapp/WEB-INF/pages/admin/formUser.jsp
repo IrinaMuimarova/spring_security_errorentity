@@ -39,7 +39,6 @@
             </form:label>
             <form:label path="roles" >Role:
                 <br/>
-                <jsp:useBean id="roles" scope="request" type="java.util.List"/>
                 <form:checkboxes path="roles" items="${roles}" itemLabel="name" itemValue="id" delimiter="<br/>" />
             </form:label>
 
